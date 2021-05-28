@@ -3,7 +3,7 @@
     
     $room_id = $_GET['id'];
 
-    $sql = "SELECT `room_number`, `floor`, `beds`, `created_at`, `updated_at` FROM `stanze` WHERE stanze.id = $room_id";
+    $sql = "SELECT `room_number`, `floor`, `beds`, `created_at`, `updated_at` FROM `stanze` WHERE stanze.id = " . $room_id . ";";
 
     $result = $conn->query($sql);
 
