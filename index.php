@@ -5,9 +5,9 @@
 
     $result = $conn->query($sql);
 
+    $rows = [];
     if ($result && $result->num_rows > 0) {
-        // output data of each row
-        $rows = [];
+        // output data of each row        
         while($row = $result->fetch_assoc()) {           
            $rows[] = $row;
         }
@@ -33,15 +33,19 @@
 
     <h1>Stanze:</h1>
 
-    <ul>
-        <?php foreach($rows as $room) { ?>
-            <li style="margin-bottom: 20px;">
-                Numero stanza: <?php echo $room['room_number']; ?><br>
-                Piano: <?php echo $room['floor']; ?> <br>
-                <a href="/php-hotel-crud/single-room.php?id=<?php echo $room['id']; ?>">Vedi dettagli stanza</a>
-            </li>
-        <?php } ?>        
-    </ul>
+    <?php if(!empty($rows)) { ?>
+        <ul>        
+            <?php foreach($rows as $room) { ?>
+                <li style="margin-bottom: 20px;">
+                    Numero stanza: <?php echo $room['room_number']; ?><br>
+                    Piano: <?php echo $room['floor']; ?> <br>
+                    <a href="/php-hotel-crud/single-room.php?id=<?php echo $room['id']; ?>">Vedi dettagli stanza</a>
+                </li>
+            <?php } ?>            
+        </ul>
+    <?php } else {?>
+        <h2>Non sono presenti stanze da visualizzare</h2>
+    <?php } ?>
     
     
 </body>

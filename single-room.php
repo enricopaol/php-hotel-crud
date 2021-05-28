@@ -7,9 +7,9 @@
 
     $result = $conn->query($sql);
 
+    $room = [];
     if ($result && $result->num_rows > 0) {
-        // output data for the row
-        $room = [];
+        // output data for the row        
         $room = $result->fetch_assoc();      
            
     } elseif ($result) {
@@ -33,20 +33,24 @@
 
     <h1>Stanza <?php echo $room['room_number']; ?></h1>
 
-    <ul>
-         <li>
-            Piano: <?php echo $room['floor']; ?>
-         </li>
-         <li>
-            Numero letti: <?php echo $room['beds']; ?>
-         </li>
-         <li>
-            Creata il: <?php echo date('d-m-Y', strtotime($room['created_at'])); ?>
-         </li>
-         <li>
-            Ultimo aggiornamento: <?php echo date('d-m-Y', strtotime($room['updated_at'])); ?>
-         </li>
-    </ul>
+    <?php if(!empty($room)) { ?>
+        <ul>        
+            <li>
+                Piano: <?php echo $room['floor']; ?>
+            </li>
+            <li>
+                Numero letti: <?php echo $room['beds']; ?>
+            </li>
+            <li>
+                Creata il: <?php echo date('d-m-Y', strtotime($room['created_at'])); ?>
+            </li>
+            <li>
+                Ultimo aggiornamento: <?php echo date('d-m-Y', strtotime($room['updated_at'])); ?>
+            </li>
+        </ul>
+    <?php } else { ?>
+        <h2>Stanza non presente</h2>
+    <?php } ?>
         
 </body>
 </html>
